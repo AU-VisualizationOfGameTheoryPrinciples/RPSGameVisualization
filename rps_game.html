@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game - Visualization!</title>
+    
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <h1 class="title">Rock, Paper, Scissors Game - Visualization!</h1>
+    <div id="main">
+        <div class="winnerText">
+            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short></p>
+            <p id="winnerText"></p>
+            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short></p>
+        </div>
+        <div class="buttons_RPS">
+            <div>
+                <button id="opponentMove" disabled>?</button>
+            </div>
+            <div>
+                <button id="rock" class="rock">Rock</button>
+                <button id="paper" class="paper">Paper</button>
+                <button id="scissors" class="scissors">Scissors</button>
+            </div>
+        </div>
+        <form id="form" method="get" action="" style="display: none;">
+            <div class="util" style="display: grid; grid-template-columns: 10% auto auto auto;">
+                <short class="util-label" style="grid-column: 1; grid-row: 1;"></short>
+                <short class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
+                <short class="util-label" style="grid-column: 3; grid-row: 1;">Paper</short>
+                <short class="util-label" style="grid-column: 4; grid-row: 1;">Scissors</short>
+                <short class="util-label" style="grid-column: 1; grid-row: 2;">Rock</short>
+                <short class="util-label" style="grid-column: 1; grid-row: 3;">Paper</short>
+                <short class="util-label" style="grid-column: 1; grid-row: 4;">Scissors</short>
+
+                <div class="utils" style="grid-column: 2; grid-row: 2;">
+                    <input id="rr_util" name="rr_util" value="0" disabled>
+                    <input id="rr_util" name="rr_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 3;">
+                    <input id="pp_util" name="pp_util" value="0" disabled>
+                    <input id="pp_util" name="pp_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 4;">
+                    <input id="ss_util" name="ss_util" value="0" disabled>
+                    <input id="ss_util" name="ss_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 2; grid-row: 3;">
+                    <input type="number" id="pr_util1" name="pr_util1" value="-1">
+                    <input type="number" id="pr_util2" name="pr_util2" value="1">
+                </div>
+                <div class="utils" style="grid-column: 2; grid-row: 4;">
+                    <input type="number" id="sr_util1" name="sr_util1" value="1">
+                    <input type="number" id="sr_util2" name="sr_util2" value="-1">
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 2;">
+                    <input type="number" id="sp_util1" name="sp_util1" value="-1">
+                    <input type="number" id="sp_util2" name="sp_util2" value="1">
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 4;">
+                    <input type="number" id="rp_util1" name="rp_util1" value="-1">
+                    <input type="number" id="rp_util2" name="rp_util2" value="1">
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 2;">
+                    <input type="number" id="rs_util1" name="rs_util1" value="1">
+                    <input type="number" id="rs_util2" name="rs_util2" value="-1">
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 3;">
+                    <input type="number" id="ps_util1" name="ps_util1" value="-1">
+                    <input type="number" id="ps_util2" name="ps_util2" value="1">
+                </div>
+            </div>
+            <input class="submit-button" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
+<script src="./calcGamePoints.js"></script>
