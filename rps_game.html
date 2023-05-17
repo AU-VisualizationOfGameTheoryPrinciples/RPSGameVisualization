@@ -13,16 +13,16 @@
 <body>
     <h1 class="title">Rock, Paper, Scissors Game - Visualization!</h1>
     <div id="main">
-        <div class="winnerText">
-            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short></p>
+        <div class="winnerTextContainer">
+            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short><short id="p1_score_addition"></short></p>
             <p id="winnerText"></p>
-            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short></p>
+            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short><short id="p2_score_addition"></short></p>
         </div>
         <div class="buttons_RPS">
             <div>
                 <button id="opponentMove" disabled>?</button>
             </div>
-            <div>
+            <div class="buttons_RPS_p1">
                 <button id="rock" class="rock">Rock</button>
                 <button id="paper" class="paper">Paper</button>
                 <button id="scissors" class="scissors">Scissors</button>

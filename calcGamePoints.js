@@ -13,6 +13,8 @@ arrayRPSName[RPS_MOVE.ROCK] = "Rock";
 arrayRPSName[RPS_MOVE.PAPER] = "Paper";
 arrayRPSName[RPS_MOVE.SCISSORS] = "Scissors";
 
+var current_move_opponent = -1;
+
 class RPS_MOVE_TUPLE {
     move_p1;
     move_p2;
@@ -85,6 +87,8 @@ function getMoveUtility(move_p1, move_p2) {
 var move_p1_input = RPS_MOVE.ROCK;
 
 function startGameRound(move_p1){
+    if(current_move_opponent != -1)
+    buttonOpponent.classList.remove(arrayRPSName[current_move_opponent].toLowerCase());
 
     let indexOtherButton1 = (move_p1+1) % RPS_MOVE.length;
     let indexOtherButton2 = (move_p1+2) % RPS_MOVE.length;
@@ -93,9 +97,12 @@ function startGameRound(move_p1){
 
     move_p1_input = move_p1;
     var move_opponent = getComputerPlayer2Move();
+    current_move_opponent = move_opponent;
     buttonOpponent.textContent = arrayRPSName[move_opponent];
-    getWinner(move_p1_input, move_opponent);
+    buttonOpponent.classList.toggle(arrayRPSName[move_opponent].toLowerCase());
 
+    getWinner(move_p1_input, move_opponent);
+    
     buttonsRPS[indexOtherButton1].disabled = false;
     buttonsRPS[indexOtherButton2].disabled = false;
 }
@@ -119,9 +126,25 @@ function getWinner(move_p1, move_p2) {
     printWinningMessage(move_p1, move_p2, move_utility);
     let p1_score = document.getElementById("p1_score_value");
     let p2_score = document.getElementById("p2_score_value");
-    console.log(p1_score.innerText);
+    
+    showScoreAddition(move_utility);
+
     p1_score.innerText = Number.parseInt(p1_score.innerText) + move_utility;
     p2_score.innerText = Number.parseInt(p2_score.innerText) - move_utility;
+}
+
+function showScoreAddition(move_utility){
+    let p1_score_addition = document.getElementById("p1_score_addition");
+    let p2_score_addition = document.getElementById("p2_score_addition");
+
+    let utility_p1 = move_utility;
+    let utility_p2 = move_utility * -1;
+
+    p1_score_addition.innerText = utility_p1 > 0 ? "+" + utility_p1 : utility_p1;
+    p2_score_addition.innerText = utility_p2 > 0 ? "+" + utility_p2 : utility_p2;
+
+    animateAddition(p1_score_addition);
+    animateAddition(p2_score_addition);
 }
 
 function getWinningMoves() {
@@ -153,4 +176,40 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     message += arrayRPSName[move_p2] + "!";
     // alert(message);
     winnerText.textContent = message;
+
+    animateResult();
 }
+
+function animateResult() {
+    let id = null;
+    const elem = winnerText;
+    let pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 15);
+    function frame() {
+        if (pos == 15) {
+            clearInterval(id);
+          } else {
+            pos++; 
+            elem.style.fontSize = pos + "px";
+          }
+        }
+  }
+  
+  function animateAddition(score_addition){
+    score_addition.style.opacity = "100%";
+    let id = null;
+    const elem = score_addition;
+    let pos = 8;
+    clearInterval(id);
+    id = setInterval(frame, 30);
+    function frame() {
+        if (pos == -14) {
+            clearInterval(id);
+            score_addition.style.opacity = "0%";
+          } else {
+            pos-=2; 
+            elem.style.top = pos + "px";
+          }
+        }
+  }
