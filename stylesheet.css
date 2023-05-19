@@ -94,14 +94,26 @@ body {
 }
 
 .rock {
+    background-image: url('img/rock.png');
+}
+
+.rock:hover {
     background-image: url('img/rock_colored.png');
 }
 
 .paper {
+    background-image: url('img/paper.png');
+}
+
+.paper:hover {
     background-image: url('img/paper_colored.png');
 }
 
 .scissors {
+    background-image: url('img/scissors.png');
+}
+
+.scissors:hover {
     background-image: url('img/scissors_colored.png');
 }
 
