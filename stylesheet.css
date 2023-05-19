@@ -1,3 +1,30 @@
+header > nav {
+    display: grid;
+    grid-template-columns: 30% auto 30%;
+    place-items: center;
+    /* justify-content: space-evenly; */
+    padding: 1em 0em;
+    margin: 1em 0em;
+    border: 1px solid #000000;
+}
+
+.setup_button {
+    width: 3em;
+    height: 3em;
+}
+
+.logo {
+    max-width: 8em;
+    min-width: 5em;
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Cursive', Arial, Helvetica, sans-serif;
+    position: relative;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -5,22 +32,22 @@ body {
 #main {
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
+    row-gap: 1em;
 }
 
 .buttons_RPS {
     align-items: center;
-    margin: 2%;
+    margin: 6%;
     display: flex;
     flex-direction: column;
-    row-gap: 8rem;
+    row-gap: 5em;
 }
 
 .buttons_RPS button {
     background-color: beige;
     border: 1px solid #000000;
-    height: 6.5rem;
-    width: 5rem;
+    height: 8em;
+    width: 6em;
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,15 +58,36 @@ body {
 }
 
 #opponentMove {
-    padding: 8%;
+    padding: 3%;
+    position: relative;
 }
 
-.buttons_RPS button:not(#opponentMove):hover {
+.otherOpponentMove1 {
+    position: relative;
+    top: -10px;
+    right: -40px;
+    z-index: -1;
+}
+
+.otherOpponentMove2 {
+    position: relative;
+    top: -10px;
+    left: -40px;
+    z-index: -1;
+}
+
+.buttons_RPS .buttons_RPS_p1 button:hover {
     transform: scaleX(1.2) scaleY(1.2);
     filter: brightness(110%)
 }
 
 .buttons_RPS_p1 {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.buttons_RPS_p2 {
     display: flex;
     flex-direction: row;
     column-gap: 10px;
@@ -101,11 +149,6 @@ body {
     column-gap: 80px;
 }
 
-.title {
-    text-align: center;
-    font-family: 'Cursive', Arial, Helvetica, sans-serif;
-    padding: 2%;
-}
 
 .settings {
     grid-column: 1;

@@ -8,10 +8,16 @@
     <title>Rock, Paper, Scissors Game - Visualization!</title>
     
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" type="image/png" href="favicon.ico" sizes="64x64">
 </head>
-
+<header>
+    <nav>
+        <img class="logo" src="img/logo.png" alt="">
+        <h1 class="title">Rock, Paper, Scissors Game - Visualization!</h1>
+        <button class="setup_button"><img>?</button>
+    </nav>
+</header>
 <body>
-    <h1 class="title">Rock, Paper, Scissors Game - Visualization!</h1>
     <div id="main">
         <div class="winnerTextContainer">
             <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short><short id="p1_score_addition"></short></p>
@@ -19,8 +25,10 @@
             <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short><short id="p2_score_addition"></short></p>
         </div>
         <div class="buttons_RPS">
-            <div>
+            <div class="buttons_RPS_p2">
+                <button class="otherOpponentMove1" disabled></button>
                 <button id="opponentMove" disabled>?</button>
+                <button class="otherOpponentMove2" disabled></button>
             </div>
             <div class="buttons_RPS_p1">
                 <button id="rock" class="rock">Rock</button>
