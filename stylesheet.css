@@ -76,9 +76,9 @@ body {
     z-index: -1;
 }
 
-.buttons_RPS .buttons_RPS_p1 button:hover {
+.buttons_RPS_p1 button:hover{
     transform: scaleX(1.2) scaleY(1.2);
-    filter: brightness(110%)
+    filter: brightness(110%);
 }
 
 .buttons_RPS_p1 {
@@ -94,15 +94,15 @@ body {
 }
 
 .rock {
-    background-image: url('img/rock.png');
+    background-image: url('img/rock_colored.png');
 }
 
 .paper {
-    background-image: url('img/paper.png');
+    background-image: url('img/paper_colored.png');
 }
 
 .scissors {
-    background-image: url('img/scissors.png');
+    background-image: url('img/scissors_colored.png');
 }
 
 .winnerTextContainer {
