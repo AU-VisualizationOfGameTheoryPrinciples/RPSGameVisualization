@@ -97,7 +97,7 @@ body {
     background-image: url('img/rock.png');
 }
 
-.rock:hover {
+.buttons_RPS_p1 .rock:hover {
     background-image: url('img/rock_colored.png');
 }
 
@@ -105,7 +105,7 @@ body {
     background-image: url('img/paper.png');
 }
 
-.paper:hover {
+.buttons_RPS_p1 .paper:hover {
     background-image: url('img/paper_colored.png');
 }
 
@@ -113,7 +113,7 @@ body {
     background-image: url('img/scissors.png');
 }
 
-.scissors:hover {
+.buttons_RPS_p1 .scissors:hover {
     background-image: url('img/scissors_colored.png');
 }
 
