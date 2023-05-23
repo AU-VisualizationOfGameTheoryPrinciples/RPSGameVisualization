@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors Game - Visualization!</title>
-    
+
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" type="image/png" href="favicon.ico" sizes="64x64">
 </head>
@@ -17,12 +17,17 @@
         <button class="setup_button"><img>?</button>
     </nav>
 </header>
+
 <body>
     <div id="main">
         <div class="winnerTextContainer">
-            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short><short id="p1_score_addition"></short></p>
+            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short>
+                <short id="p1_score_addition"></short>
+            </p>
             <p id="winnerText"></p>
-            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short><short id="p2_score_addition"></short></p>
+            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short>
+                <short id="p2_score_addition"></short>
+            </p>
         </div>
         <div class="buttons_RPS">
             <div class="buttons_RPS_p2">
@@ -37,6 +42,18 @@
             </div>
         </div>
         <form id="form" method="get" action="" style="display: none;">
+            <div>
+                <label for="random">Opponent uses random move:</label>
+                <input type="checkbox" id="random" name="random" value="true" checked>
+                <label for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
+                <input type="checkbox" id="randomMSNE" name="randomMSNE" value="true">
+                <label for="habitMove">Opponent uses his moves in a certain habit:</label>
+                <input type="checkbox" id="habitMove" name="habitMove" value="true">
+                <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
+                <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
+                <label for="specific">Opponent uses only one of the checked Strategies:</label>
+                <input type="checkbox" id="specific" name="specific" value="true">
+            </div>
             <div class="util" style="display: grid; grid-template-columns: 10% auto auto auto;">
                 <short class="util-label" style="grid-column: 1; grid-row: 1;"></short>
                 <short class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
@@ -87,5 +104,6 @@
         </form>
     </div>
 </body>
+
 </html>
 <script src="./calcGamePoints.js"></script>
