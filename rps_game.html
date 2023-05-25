@@ -14,8 +14,72 @@
     <nav>
         <img class="logo" src="img/logo.png" alt="">
         <h1 class="title">Rock, Paper, Scissors Game - Visualization!</h1>
-        <button class="setup_button"><img>?</button>
+        <button class="setup_button" onclick=`${document.getElementById("form").classList.toggle('hide')}`><img>?</button>
     </nav>
+    <div style="display: flex; justify-content: center;">
+
+        <form id="form" method="get" action="" class="hide">
+            <div class="strategies">
+                <label for="random">Opponent uses random move:</label>
+                <input type="checkbox" id="random" name="random" value="true" checked>
+                <label for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
+                <input type="checkbox" id="randomMSNE" name="randomMSNE" value="true">
+                <label for="habitMove">Opponent uses his moves in a certain habit:</label>
+            <input type="checkbox" id="habitMove" name="habitMove" value="true">
+            <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
+            <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
+            <label for="specific">Opponent uses only one of the checked Strategies:</label>
+            <input type="checkbox" id="specific" name="specific" value="true">
+        </div>
+        <div class="util" style="display: grid; grid-template-columns: 15% auto auto auto;">
+            <short class="util-label" style="grid-column: 1; grid-row: 1;"></short>
+            <short class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
+            <short class="util-label" style="grid-column: 3; grid-row: 1;">Paper</short>
+            <short class="util-label" style="grid-column: 4; grid-row: 1;">Scissors</short>
+            <short class="util-label" style="grid-column: 1; grid-row: 2;">Rock</short>
+            <short class="util-label" style="grid-column: 1; grid-row: 3;">Paper</short>
+            <short class="util-label" style="grid-column: 1; grid-row: 4;">Scissors</short>
+
+            <div class="utils" style="grid-column: 2; grid-row: 2;">
+                <input id="rr_util" name="rr_util" value="0" disabled>
+                <input id="rr_util" name="rr_util" value="0" disabled>
+            </div>
+            <div class="utils" style="grid-column: 3; grid-row: 3;">
+                <input id="pp_util" name="pp_util" value="0" disabled>
+                <input id="pp_util" name="pp_util" value="0" disabled>
+            </div>
+            <div class="utils" style="grid-column: 4; grid-row: 4;">
+                <input id="ss_util" name="ss_util" value="0" disabled>
+                <input id="ss_util" name="ss_util" value="0" disabled>
+            </div>
+            <div class="utils" style="grid-column: 2; grid-row: 3;">
+                <input type="number" id="pr_util1" name="pr_util1" value="-1">
+                <input type="number" id="pr_util2" name="pr_util2" value="1">
+            </div>
+            <div class="utils" style="grid-column: 2; grid-row: 4;">
+                <input type="number" id="sr_util1" name="sr_util1" value="1">
+                <input type="number" id="sr_util2" name="sr_util2" value="-1">
+            </div>
+            <div class="utils" style="grid-column: 3; grid-row: 2;">
+                <input type="number" id="sp_util1" name="sp_util1" value="-1">
+                <input type="number" id="sp_util2" name="sp_util2" value="1">
+            </div>
+            <div class="utils" style="grid-column: 3; grid-row: 4;">
+                <input type="number" id="rp_util1" name="rp_util1" value="-1">
+                <input type="number" id="rp_util2" name="rp_util2" value="1">
+            </div>
+            <div class="utils" style="grid-column: 4; grid-row: 2;">
+                <input type="number" id="rs_util1" name="rs_util1" value="1">
+                <input type="number" id="rs_util2" name="rs_util2" value="-1">
+            </div>
+            <div class="utils" style="grid-column: 4; grid-row: 3;">
+                <input type="number" id="ps_util1" name="ps_util1" value="-1">
+                <input type="number" id="ps_util2" name="ps_util2" value="1">
+            </div>
+        </div>
+        <input class="submit-button" type="submit" value="Submit">
+    </form>
+</div>
 </header>
 
 <body>
@@ -41,67 +105,6 @@
                 <button id="scissors" class="scissors">Scissors</button>
             </div>
         </div>
-        <form id="form" method="get" action="" style="display: none;">
-            <div>
-                <label for="random">Opponent uses random move:</label>
-                <input type="checkbox" id="random" name="random" value="true" checked>
-                <label for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
-                <input type="checkbox" id="randomMSNE" name="randomMSNE" value="true">
-                <label for="habitMove">Opponent uses his moves in a certain habit:</label>
-                <input type="checkbox" id="habitMove" name="habitMove" value="true">
-                <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
-                <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
-                <label for="specific">Opponent uses only one of the checked Strategies:</label>
-                <input type="checkbox" id="specific" name="specific" value="true">
-            </div>
-            <div class="util" style="display: grid; grid-template-columns: 10% auto auto auto;">
-                <short class="util-label" style="grid-column: 1; grid-row: 1;"></short>
-                <short class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
-                <short class="util-label" style="grid-column: 3; grid-row: 1;">Paper</short>
-                <short class="util-label" style="grid-column: 4; grid-row: 1;">Scissors</short>
-                <short class="util-label" style="grid-column: 1; grid-row: 2;">Rock</short>
-                <short class="util-label" style="grid-column: 1; grid-row: 3;">Paper</short>
-                <short class="util-label" style="grid-column: 1; grid-row: 4;">Scissors</short>
-
-                <div class="utils" style="grid-column: 2; grid-row: 2;">
-                    <input id="rr_util" name="rr_util" value="0" disabled>
-                    <input id="rr_util" name="rr_util" value="0" disabled>
-                </div>
-                <div class="utils" style="grid-column: 3; grid-row: 3;">
-                    <input id="pp_util" name="pp_util" value="0" disabled>
-                    <input id="pp_util" name="pp_util" value="0" disabled>
-                </div>
-                <div class="utils" style="grid-column: 4; grid-row: 4;">
-                    <input id="ss_util" name="ss_util" value="0" disabled>
-                    <input id="ss_util" name="ss_util" value="0" disabled>
-                </div>
-                <div class="utils" style="grid-column: 2; grid-row: 3;">
-                    <input type="number" id="pr_util1" name="pr_util1" value="-1">
-                    <input type="number" id="pr_util2" name="pr_util2" value="1">
-                </div>
-                <div class="utils" style="grid-column: 2; grid-row: 4;">
-                    <input type="number" id="sr_util1" name="sr_util1" value="1">
-                    <input type="number" id="sr_util2" name="sr_util2" value="-1">
-                </div>
-                <div class="utils" style="grid-column: 3; grid-row: 2;">
-                    <input type="number" id="sp_util1" name="sp_util1" value="-1">
-                    <input type="number" id="sp_util2" name="sp_util2" value="1">
-                </div>
-                <div class="utils" style="grid-column: 3; grid-row: 4;">
-                    <input type="number" id="rp_util1" name="rp_util1" value="-1">
-                    <input type="number" id="rp_util2" name="rp_util2" value="1">
-                </div>
-                <div class="utils" style="grid-column: 4; grid-row: 2;">
-                    <input type="number" id="rs_util1" name="rs_util1" value="1">
-                    <input type="number" id="rs_util2" name="rs_util2" value="-1">
-                </div>
-                <div class="utils" style="grid-column: 4; grid-row: 3;">
-                    <input type="number" id="ps_util1" name="ps_util1" value="-1">
-                    <input type="number" id="ps_util2" name="ps_util2" value="1">
-                </div>
-            </div>
-            <input class="submit-button" type="submit" value="Submit">
-        </form>
     </div>
 </body>
 

@@ -151,7 +151,14 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0% 3%;
+    padding: 5%;
     align-items: center;
+    row-gap: 20px;
+    position: absolute;
+    background-color: #fafafa;
+    border: 1px solid #000000;
+    z-index: 2;
+    top: calc(40vh);
 }
 
 .form {
@@ -161,6 +168,17 @@ body {
     column-gap: 80px;
 }
 
+.strategies {
+    display: grid;
+}
+
+.strategies label {
+    grid-column: 1;
+}
+
+.strategies input {
+    grid-column: 2;
+}
 
 .settings {
     grid-column: 1;
@@ -176,6 +194,7 @@ body {
     text-align: center;
     border: 1px solid #000000;
     font-weight: bold;
+    background-color: #e2e2e2;
 }
 
 .util {
@@ -190,6 +209,7 @@ body {
 
 .util input {
     text-align: center;
+    width: 100%;
 }
 
 .util label,
@@ -208,4 +228,24 @@ body {
     font-size: medium;
     width: 10%;
     padding: 1%;
+    min-width: max-content;
+}
+
+/* remove number input arrow */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.hide {
+    visibility: hidden;
 }

@@ -91,12 +91,43 @@ function getMoveUtilityHelper(move_p1, move_p2) {
 
 var move_p1_input = -1;
 var current_move_opponent = -1;
-var doRandomMove = true;
-var doRandomMSNEMove = true;
-var doHabitMove = true;
-var doHabitCounterMove = true;
-var doOnlyOneStrategy = false;
+var doRandomMove = getFlag("random");
+var doRandomMSNEMove = getFlag("randomMSNE");
+var doHabitMove = getFlag("habitMove");
+var doHabitCounterMove = getFlag("habitMoveCounter");
+var doOnlyOneStrategy = getFlag("specific");
 var option_count = 0;
+
+setValueById("random", doRandomMove);
+setValueById("randomMSNE", doRandomMSNEMove);
+setValueById("habitMove", doHabitMove);
+setValueById("habitMoveCounter", doHabitCounterMove);
+setValueById("specific", doOnlyOneStrategy);
+
+var specific_move_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
+
+function get(name) {
+    if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search)) {
+        if (typeof name[1] == "undefined") {
+            return "";
+        }
+        return decodeURIComponent(name[1]);
+    }
+    return "";
+}
+
+function getFlag(name) {
+    let flag = get(name) === "true" ? true : false;
+    return flag;
+}
+
+function setValueById(id, value){
+    if(typeof value == "boolean"){
+        document.querySelector(`#${id}`).checked = value;
+    } else {
+        document.getElementById(id).value = value;
+    }
+}
 
 function startGameRound(move_p1) {
     if (current_move_opponent != -1)
@@ -114,7 +145,7 @@ function startGameRound(move_p1) {
     console.log("old2:" + current_move_opponent);
 
     move_p1_input = move_p1;
-    var move_opponent = getComputerPlayer2Move(move_p1_last_round, move_p2_last_round);
+    var move_opponent = getComputerPlayer2Move(move_p1_last_round, move_p2_last_round, specific_move_num);
     current_move_opponent = move_opponent;
     console.log("now1: " + move_p1_input);
     console.log("now2: " + current_move_opponent);
@@ -142,11 +173,15 @@ function getsRandomlyPicked(option_num, rand_num) {
     return option_num == rand_num;
 }
 
-function getComputerPlayer2Move(last_move_p1, last_move_p2) {
-    // if (!doOnlyOneStrategy) {
+function getCheckedOptionsNumber(){
+    let rand = Math.floor(Math.random() * countCheckedOptions())+1;
+    console.log(rand);
+    return rand;
+}
+
+function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_move_num = null) {
         option_count = 1;
-        let checkedOptionsCount = countCheckedOptions();
-        let rand = Math.floor(Math.random() * checkedOptionsCount)+1;
+        let rand = specific_move_num == null ? getCheckedOptionsNumber() : specific_move_num;
         if (doRandomMove) {
             if (getsRandomlyPicked(option_count, rand)) {
                 return getRandomMove();
@@ -173,7 +208,6 @@ function getComputerPlayer2Move(last_move_p1, last_move_p2) {
                 return getRPSHabitCounterMove(last_move_p2, last_move_p1, 1);
             }
         }
-    // }
     return getRandomMove();
 }
 
