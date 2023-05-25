@@ -25,24 +25,23 @@ class RPS_MOVE_TUPLE {
     }
 }
 
-const moveRockRock = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.ROCK, 0);
-const moveRockPaper = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.PAPER, -1);
-const moveRockScissors = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.SCISSORS, 1);
-const movePaperPaper = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.PAPER, 0);
-const movePaperScissors = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.SCISSORS, -1);
-const movePaperRock = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.ROCK, 1);
-const moveScissorsScissors = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.SCISSORS, 0);
-const moveScissorsRock = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.ROCK, -1);
-const moveScissorsPaper = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.PAPER, 1);
+const moveRockRock = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.ROCK, [getUtility("rr_util1", 0),getUtility("rr_util2", 0)]);
+const moveRockPaper = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.PAPER, [getUtility("rp_util1", -1),getUtility("rp_util2", 1)]);
+const moveRockScissors = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.SCISSORS, [getUtility("rs_util1", 1),getUtility("rs_util2", -1)]);
+const movePaperPaper = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.PAPER, [getUtility("pp_util1", 0),getUtility("pp_util2", 0)]);
+const movePaperScissors = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.SCISSORS, [getUtility("ps_util1", -1),getUtility("ps_util2", 1)]);
+const movePaperRock = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.ROCK, [getUtility("pr_util1", 1),getUtility("pr_util2", -1)]);
+const moveScissorsScissors = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.SCISSORS, [getUtility("ss_util1", 0),getUtility("ss_util2", 0)]);
+const moveScissorsRock = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.ROCK, [getUtility("sr_util1", -1),getUtility("sr_util2", 1)]);
+const moveScissorsPaper = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.PAPER, [getUtility("sp_util1", 1),getUtility("sp_util2", -1)]);
 
 buttonRock.addEventListener("click", () => startGameRound(RPS_MOVE.ROCK));
 buttonPaper.addEventListener("click", () => startGameRound(RPS_MOVE.PAPER));
 buttonScissors.addEventListener("click", () => startGameRound(RPS_MOVE.SCISSORS));
 
-function getMoveUtilities(move_current_player, move_other_player, current_player_num = 1) {
+function getMoveUtilities(move_p1, move_p2) {
     // bring p1 and p2 in correct order
-    let utility = current_player_num == 1 ? getMoveUtilityHelper(move_current_player, move_other_player) : getMoveUtilityHelper(move_other_player, move_current_player);
-    return [utility, utility * -1];
+    return getMoveUtilityHelper(move_p1, move_p2);
 }
 
 function getMoveUtilityHelper(move_p1, move_p2) {
@@ -119,6 +118,15 @@ function get(name) {
 function getFlag(name) {
     let flag = get(name) === "true" ? true : false;
     return flag;
+}
+
+function getUtility(name, defaultValue){
+    let utility = Number.parseInt(get(name));
+    if(!Number.isInteger(utility)){
+        utility = defaultValue;
+    }
+    setValueById(name, utility);
+    return utility
 }
 
 function setValueById(id, value){
@@ -241,7 +249,7 @@ function getRPSHabitOrRandomMove(last_move_current_player, last_move_other_playe
 }
 
 function getRPSHabitMove(last_move_current_player, last_move_other_player, current_player_num) {
-    let move_utilities = getMoveUtilities(last_move_current_player, last_move_other_player, current_player_num);
+    let move_utilities = current_player_num == 1 ? getMoveUtilities(last_move_current_player, last_move_other_player) : getMoveUtilities(last_move_other_player, last_move_current_player);
     let utility_num = current_player_num - 1;
     console.log("habit chosen.");
     // console.log("I am Player " + current_player_num + " with " + move_utilities[utility_num]);
