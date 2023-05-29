@@ -97,6 +97,10 @@ var doHabitCounterMove = getFlag("habitMoveCounter");
 var doOnlyOneStrategy = getFlag("specific");
 var option_count = 0;
 
+if(countCheckedOptions() == 0){
+    doRandomMove = true;
+}
+
 setValueById("random", doRandomMove);
 setValueById("randomMSNE", doRandomMSNEMove);
 setValueById("habitMove", doHabitMove);
