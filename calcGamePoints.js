@@ -1,3 +1,5 @@
+import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE } from "./RPS_Moves.js";
+import { animateAddition, animateResult } from "./animations.js";
 
 var buttonRock = document.querySelector("#rock");
 var buttonPaper = document.querySelector("#paper");
@@ -7,37 +9,40 @@ var buttonsRPS = [buttonRock, buttonPaper, buttonScissors];
 var buttonOpponent = document.querySelector("#opponentMove");
 var winnerText = document.querySelector("#winnerText");
 
-const RPS_MOVE = { ROCK: 0, PAPER: 1, SCISSORS: 2, length: 3 };
-var arrayRPSName = [3];
-arrayRPSName[RPS_MOVE.ROCK] = "Rock";
-arrayRPSName[RPS_MOVE.PAPER] = "Paper";
-arrayRPSName[RPS_MOVE.SCISSORS] = "Scissors";
-
-class RPS_MOVE_TUPLE {
-    move_p1;
-    move_p2;
-    utilityValue;
-
-    constructor(move_p1, move_p2, utilityValue) {
-        this.move_p1 = move_p1;
-        this.move_p2 = move_p2;
-        this.utilityValue = utilityValue;
-    }
-}
-
-const moveRockRock = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.ROCK, [getUtility("rr_util1", 0),getUtility("rr_util2", 0)]);
-const moveRockPaper = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.PAPER, [getUtility("rp_util1", -1),getUtility("rp_util2", 1)]);
-const moveRockScissors = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.SCISSORS, [getUtility("rs_util1", 1),getUtility("rs_util2", -1)]);
-const movePaperPaper = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.PAPER, [getUtility("pp_util1", 0),getUtility("pp_util2", 0)]);
-const movePaperScissors = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.SCISSORS, [getUtility("ps_util1", -1),getUtility("ps_util2", 1)]);
-const movePaperRock = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.ROCK, [getUtility("pr_util1", 1),getUtility("pr_util2", -1)]);
-const moveScissorsScissors = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.SCISSORS, [getUtility("ss_util1", 0),getUtility("ss_util2", 0)]);
-const moveScissorsRock = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.ROCK, [getUtility("sr_util1", -1),getUtility("sr_util2", 1)]);
-const moveScissorsPaper = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.PAPER, [getUtility("sp_util1", 1),getUtility("sp_util2", -1)]);
+const moveRockRock = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.ROCK, [getUtility("rr_util1", 0), getUtility("rr_util2", 0)]);
+const moveRockPaper = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.PAPER, [getUtility("rp_util1", -1), getUtility("rp_util2", 1)]);
+const moveRockScissors = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.SCISSORS, [getUtility("rs_util1", 1), getUtility("rs_util2", -1)]);
+const movePaperPaper = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.PAPER, [getUtility("pp_util1", 0), getUtility("pp_util2", 0)]);
+const movePaperScissors = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.SCISSORS, [getUtility("ps_util1", -1), getUtility("ps_util2", 1)]);
+const movePaperRock = new RPS_MOVE_TUPLE(RPS_MOVE.PAPER, RPS_MOVE.ROCK, [getUtility("pr_util1", 1), getUtility("pr_util2", -1)]);
+const moveScissorsScissors = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.SCISSORS, [getUtility("ss_util1", 0), getUtility("ss_util2", 0)]);
+const moveScissorsRock = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.ROCK, [getUtility("sr_util1", -1), getUtility("sr_util2", 1)]);
+const moveScissorsPaper = new RPS_MOVE_TUPLE(RPS_MOVE.SCISSORS, RPS_MOVE.PAPER, [getUtility("sp_util1", 1), getUtility("sp_util2", -1)]);
 
 buttonRock.addEventListener("click", () => startGameRound(RPS_MOVE.ROCK));
 buttonPaper.addEventListener("click", () => startGameRound(RPS_MOVE.PAPER));
 buttonScissors.addEventListener("click", () => startGameRound(RPS_MOVE.SCISSORS));
+
+var move_p1_input = -1;
+var current_move_opponent = -1;
+var doRandomMove = getFlag("random");
+var doRandomMSNEMove = getFlag("randomMSNE");
+var doHabitMove = getFlag("habitMove");
+var doHabitCounterMove = getFlag("habitMoveCounter");
+var doOnlyOneStrategy = getFlag("specific");
+var option_count = 0;
+
+if (countCheckedOptions() == 0) {
+    doRandomMove = true;
+}
+
+setValueById("random", doRandomMove);
+setValueById("randomMSNE", doRandomMSNEMove);
+setValueById("habitMove", doHabitMove);
+setValueById("habitMoveCounter", doHabitCounterMove);
+setValueById("specific", doOnlyOneStrategy);
+
+var specific_move_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
 
 function getMoveUtilities(move_p1, move_p2) {
     // bring p1 and p2 in correct order
@@ -88,27 +93,6 @@ function getMoveUtilityHelper(move_p1, move_p2) {
 // mapUtilityPoints.set(moveScissorsRock, moveScissorsRock.utilityValue);
 // mapUtilityPoints.set(moveScissorsPaper, moveScissorsPaper.utilityValue);
 
-var move_p1_input = -1;
-var current_move_opponent = -1;
-var doRandomMove = getFlag("random");
-var doRandomMSNEMove = getFlag("randomMSNE");
-var doHabitMove = getFlag("habitMove");
-var doHabitCounterMove = getFlag("habitMoveCounter");
-var doOnlyOneStrategy = getFlag("specific");
-var option_count = 0;
-
-if(countCheckedOptions() == 0){
-    doRandomMove = true;
-}
-
-setValueById("random", doRandomMove);
-setValueById("randomMSNE", doRandomMSNEMove);
-setValueById("habitMove", doHabitMove);
-setValueById("habitMoveCounter", doHabitCounterMove);
-setValueById("specific", doOnlyOneStrategy);
-
-var specific_move_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
-
 function get(name) {
     if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search)) {
         if (typeof name[1] == "undefined") {
@@ -124,17 +108,17 @@ function getFlag(name) {
     return flag;
 }
 
-function getUtility(name, defaultValue){
+function getUtility(name, defaultValue) {
     let utility = Number.parseInt(get(name));
-    if(!Number.isInteger(utility)){
+    if (!Number.isInteger(utility)) {
         utility = defaultValue;
     }
     setValueById(name, utility);
     return utility
 }
 
-function setValueById(id, value){
-    if(typeof value == "boolean"){
+function setValueById(id, value) {
+    if (typeof value == "boolean") {
         document.querySelector(`#${id}`).checked = value;
     } else {
         document.getElementById(id).value = value;
@@ -185,41 +169,41 @@ function getsRandomlyPicked(option_num, rand_num) {
     return option_num == rand_num;
 }
 
-function getCheckedOptionsNumber(){
-    let rand = Math.floor(Math.random() * countCheckedOptions())+1;
+function getCheckedOptionsNumber() {
+    let rand = Math.floor(Math.random() * countCheckedOptions()) + 1;
     console.log(rand);
     return rand;
 }
 
 function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_move_num = null) {
-        option_count = 1;
-        let rand = specific_move_num == null ? getCheckedOptionsNumber() : specific_move_num;
-        if (doRandomMove) {
-            if (getsRandomlyPicked(option_count, rand)) {
+    option_count = 1;
+    let rand = specific_move_num == null ? getCheckedOptionsNumber() : specific_move_num;
+    if (doRandomMove) {
+        if (getsRandomlyPicked(option_count, rand)) {
+            return getRandomMove();
+        }
+    }
+    if (doRandomMSNEMove) {
+        if (getsRandomlyPicked(option_count, rand)) {
+            let percMSNERock = 1 / 4;
+            let percMSNEPaper = 1 / 4;
+            return getRandomMove(percMSNERock, percMSNEPaper);
+        }
+    }
+    if (doHabitMove) {
+        if (getsRandomlyPicked(option_count, rand)) {
+            if (last_move_p1 == -1 || last_move_p2 == -1)
                 return getRandomMove();
-            }
+            return getRPSHabitMove(last_move_p2, last_move_p1, 2);
         }
-        if (doRandomMSNEMove) {
-            if (getsRandomlyPicked(option_count, rand)) {
-                let percMSNERock = 1 / 4;
-                let percMSNEPaper = 1 / 4;
-                return getRandomMove(percMSNERock, percMSNEPaper);
-            }
+    }
+    if (doHabitCounterMove) {
+        if (getsRandomlyPicked(option_count, rand)) {
+            if (last_move_p1 == -1 || last_move_p2 == -1)
+                return getRandomMove();
+            return getRPSHabitCounterMove(last_move_p2, last_move_p1, 1);
         }
-        if (doHabitMove) {
-            if (getsRandomlyPicked(option_count, rand)) {
-                if (last_move_p1 == -1 || last_move_p2 == -1)
-                    return getRandomMove();
-                return getRPSHabitMove(last_move_p2, last_move_p1, 2);
-            }
-        }
-        if (doHabitCounterMove) {
-            if (getsRandomlyPicked(option_count, rand)) {
-                if (last_move_p1 == -1 || last_move_p2 == -1)
-                    return getRandomMove();
-                return getRPSHabitCounterMove(last_move_p2, last_move_p1, 1);
-            }
-        }
+    }
     return getRandomMove();
 }
 
@@ -336,39 +320,5 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     // alert(message);
     winnerText.textContent = message;
 
-    animateResult();
-}
-
-function animateResult() {
-    let id = null;
-    const elem = winnerText;
-    let pos = 0;
-    clearInterval(id);
-    id = setInterval(frame, 15);
-    function frame() {
-        if (pos == 15) {
-            clearInterval(id);
-        } else {
-            pos++;
-            elem.style.fontSize = pos + "px";
-        }
-    }
-}
-
-function animateAddition(score_addition) {
-    score_addition.style.opacity = "100%";
-    let id = null;
-    const elem = score_addition;
-    let pos = 8;
-    clearInterval(id);
-    id = setInterval(frame, 30);
-    function frame() {
-        if (pos == -14) {
-            clearInterval(id);
-            score_addition.style.opacity = "0%";
-        } else {
-            pos -= 2;
-            elem.style.top = pos + "px";
-        }
-    }
+    animateResult(winnerText);
 }
