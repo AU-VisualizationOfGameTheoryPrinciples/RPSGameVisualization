@@ -8,6 +8,10 @@ header > nav {
     border: 1px solid #000000;
 }
 
+nav > .title{
+    margin-left: 1em;
+}
+
 .setup_button {
     width: 3em;
     height: 3em;
@@ -23,6 +27,8 @@ header > nav {
     text-align: center;
     font-family: 'Comic Sans MS', Verdana, Geneva, Tahoma, sans-serif;
     position: relative;
+    display: flex;
+    justify-self: center;
 }
 
 body {
@@ -229,6 +235,15 @@ body {
     width: 10%;
     padding: 1%;
     min-width: max-content;
+}
+
+.setup_button > .setup_button_image {
+    /* background-image: url(./img/settings_icon.png); */
+    /* background-size: 80%; */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    width: 100%;
+    display: block;
 }
 
 /* remove number input arrow */
