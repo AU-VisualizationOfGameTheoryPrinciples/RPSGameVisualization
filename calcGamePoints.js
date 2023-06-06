@@ -1,5 +1,6 @@
 import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE } from "./RPS_Moves.js";
 import { animateAddition, animateResult } from "./animations.js";
+// import { calcMSNE } from "./calcMSNE.js";
 
 var buttonRock = document.querySelector("#rock");
 var buttonPaper = document.querySelector("#paper");
@@ -31,6 +32,11 @@ var doHabitMove = getFlag("habitMove");
 var doHabitCounterMove = getFlag("habitMoveCounter");
 var doOnlyOneStrategy = getFlag("specific");
 var option_count = 0;
+
+if (doRandomMSNEMove) {
+    const MSNE_p1 = getMSNE(1);
+    const MSNE_p2 = getMSNE(2);
+}
 
 if (countCheckedOptions() == 0) {
     doRandomMove = true;
@@ -79,6 +85,59 @@ function getMoveUtilityHelper(move_p1, move_p2) {
     }
     console.log("Error: impossible move!");
     return -1;
+}
+
+function getMSNE(current_player_num) {
+    let other_player_num = current_player_num % 2 + 1;
+    let ret = calcMSNE(current_player_num);
+
+    let rock = document.querySelector(`#rock${current_player_num}`);
+    let paper = document.querySelector(`#paper${current_player_num}`);
+    let scissors = document.querySelector(`#scissors${current_player_num}`);
+
+    rock.innerText = arrayRPSName[RPS_MOVE.ROCK] + '\n (' + roundNumByThreeDecimals(ret[0]).toFixed(2) * 100 + "%)";
+    paper.innerText = arrayRPSName[RPS_MOVE.PAPER] + "\n (" + roundNumByThreeDecimals(ret[1]).toFixed(2) * 100 + "%)";
+    scissors.innerText = arrayRPSName[RPS_MOVE.SCISSORS] + "\n (" + roundNumByThreeDecimals(ret[2]).toFixed(2) * 100 + "%)";
+
+    return ret;
+}
+
+function calcMSNE(current_player_num) {
+    let other_player_num = current_player_num % 2 + 1;
+    let current_player_index = current_player_num - 1;
+    let other_player_index = other_player_num - 1;
+
+    let rr, pr, sr, rp, pp, sp, rs, ps, ss;
+    rr = moveRockRock.utilityValue[other_player_index];
+    pr = movePaperRock.utilityValue[other_player_index];
+    sr = moveScissorsRock.utilityValue[other_player_index];
+    rp = moveRockPaper.utilityValue[other_player_index];
+    pp = movePaperPaper.utilityValue[other_player_index];
+    sp = moveScissorsPaper.utilityValue[other_player_index];
+    rs = moveRockScissors.utilityValue[other_player_index];
+    ps = movePaperScissors.utilityValue[other_player_index];
+    ss = moveScissorsScissors.utilityValue[other_player_index];
+    
+    const x = (-rp + pp + rs - ps) / (rr - pr - rs + ps);
+    const y = (ps - rs) / (rr - pr - rs + ps);
+    const p = -pr + ps + sr - ss;
+    const q = -ps + ss;
+
+    var dM = (y * p + q) / (-x * p + q + pp - sp);
+    var dU = dM * x + y;
+    var dD = 1 - dM - dU;
+
+    console.log(`MSNE calced: Rock = ${dU}, Paper = ${dM}, Scissors = ${dD}`)
+
+    // const EUL = dU * moveRockRock.utilityValue[current_player_index] + dM * moveRockPaper.utilityValue[current_player_index] + dD * moveRockScissors.utilityValue[current_player_index];
+    // const EUM = dU * movePaperRock.utilityValue[current_player_index] + dM * movePaperPaper.utilityValue[current_player_index] + dD * movePaperScissors.utilityValue[current_player_index];
+    // const EUR = dU * moveScissorsRock.utilityValue[current_player_index] + dM * moveScissorsPaper.utilityValue[current_player_index] + dD * moveScissorsScissors.utilityValue[current_player_index];
+
+    return [dM, dU, dD];
+}
+
+function roundNumByThreeDecimals(num) {
+    return Math.round((num + Number.EPSILON) * 1000) / 1000;
 }
 
 // const mapUtilityPoints = new Map();
@@ -185,8 +244,11 @@ function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_move_num = 
     }
     if (doRandomMSNEMove) {
         if (getsRandomlyPicked(option_count, rand)) {
-            let percMSNERock = 1 / 4;
-            let percMSNEPaper = 1 / 4;
+            let MSNE = MSNE_p1;
+
+            let percMSNERock = MSNE[0];
+            let percMSNEPaper = MSNE[1];
+            console.log(`MSNE p2: Rock = ${MSNE[0]}, Paper = ${MSNE[1]}, Scissors = ${MSNE[2]}`)
             return getRandomMove(percMSNERock, percMSNEPaper);
         }
     }
