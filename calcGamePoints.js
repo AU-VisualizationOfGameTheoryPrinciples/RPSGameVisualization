@@ -33,9 +33,12 @@ var doHabitCounterMove = getFlag("habitMoveCounter");
 var doOnlyOneStrategy = getFlag("specific");
 var option_count = 0;
 
+var MSNE_p1;
+var MSNE_p2;
+
 if (doRandomMSNEMove) {
-    const MSNE_p1 = getMSNE(1);
-    const MSNE_p2 = getMSNE(2);
+    MSNE_p1 = getMSNE(1);
+    MSNE_p2 = getMSNE(2);
 }
 
 if (countCheckedOptions() == 0) {
