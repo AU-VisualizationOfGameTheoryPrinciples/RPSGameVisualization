@@ -5,7 +5,8 @@ header > nav {
     /* justify-content: space-evenly; */
     padding: 1em 0em;
     margin: 1em 0em;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
+    box-shadow: #000000 1px 1px 3px;
 }
 
 nav > .title{
@@ -25,7 +26,8 @@ nav > .title{
 
 .title {
     text-align: center;
-    font-family: 'Comic Sans MS', Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Rampart One', 'Bangers', 'Comic Sans MS', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.65rem;
     position: relative;
     display: flex;
     justify-self: center;
@@ -126,7 +128,7 @@ body {
 .winnerTextContainer {
     text-align: center;
     font-weight: bold;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
     /* width: fit-content; */
     padding: 2%;
     /* align-content: center; */
@@ -162,7 +164,8 @@ body {
     row-gap: 20px;
     position: absolute;
     background-color: #fafafa;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
+    box-shadow: #000000 2px 4px 8px;
     z-index: 2;
     top: calc(40vh);
 }
