@@ -50,6 +50,10 @@ body {
     margin: 2%;
 }
 
+.player_tag {
+    font-weight: bold;
+}
+
 .buttons_RPS {
     align-items: center;
     margin: 6%;
