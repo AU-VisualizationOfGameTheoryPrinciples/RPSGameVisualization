@@ -1,5 +1,6 @@
 import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE } from "./RPS_Moves.js";
 import { animateAddition, animateResult } from "./animations.js";
+import { getFlag, setValueById, getUtility } from "./manageFormValues.js";
 // import { calcMSNE } from "./calcMSNE.js";
 
 var buttonRock = document.querySelector("#rock");
@@ -154,38 +155,6 @@ function roundNumByThreeDecimals(num) {
 // mapUtilityPoints.set(moveScissorsScissors, moveScissorsScissors.utilityValue);
 // mapUtilityPoints.set(moveScissorsRock, moveScissorsRock.utilityValue);
 // mapUtilityPoints.set(moveScissorsPaper, moveScissorsPaper.utilityValue);
-
-function get(name) {
-    if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search)) {
-        if (typeof name[1] == "undefined") {
-            return "";
-        }
-        return decodeURIComponent(name[1]);
-    }
-    return "";
-}
-
-function getFlag(name) {
-    let flag = get(name) === "true" ? true : false;
-    return flag;
-}
-
-function getUtility(name, defaultValue) {
-    let utility = Number.parseInt(get(name));
-    if (!Number.isInteger(utility)) {
-        utility = defaultValue;
-    }
-    setValueById(name, utility);
-    return utility
-}
-
-function setValueById(id, value) {
-    if (typeof value == "boolean") {
-        document.querySelector(`#${id}`).checked = value;
-    } else {
-        document.getElementById(id).value = value;
-    }
-}
 
 function startGameRound(move_p1) {
     if (current_move_opponent != -1)
