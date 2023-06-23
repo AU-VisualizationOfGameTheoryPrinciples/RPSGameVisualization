@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rampart+One&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" type="image/png" href="favicon.ico" sizes="64x64">
 </head>
@@ -17,82 +17,87 @@
     <nav>
         <img class="logo" src="img/logo.png" alt="">
         <h1 class="title">Rock, Paper, Scissors - Game Theory!</h1>
-        <button class="setup_button" onclick=`${document.getElementById("form").classList.toggle('hide')}`><img class="setup_button_image" src="./img/settings_icon.png" alt="settings"></button>
+        <button class="setup_button" onclick=`${document.getElementById("form-container").classList.toggle('hide')}`><img
+                class="setup_button_image" src="./img/settings_icon.png" alt="settings"></button>
     </nav>
-    <div style="display: flex; justify-content: center;">
+    <div id="form-container" style="display: flex; justify-content: center;" class="hide">
 
-        <form id="form" method="get" action="" class="hide">
+        <form id="form" method="get" action="">
+            <short class="caption">CPU Strategies</short>
+            <hr>
             <div class="strategies">
                 <label for="random">Opponent uses random move:</label>
                 <input type="checkbox" id="random" name="random" value="true" checked>
                 <label for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
                 <input type="checkbox" id="randomMSNE" name="randomMSNE" value="true">
                 <label for="habitMove">Opponent uses his moves in a certain habit:</label>
-            <input type="checkbox" id="habitMove" name="habitMove" value="true">
-            <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
-            <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
-            <label for="specific">Opponent uses only one of the checked Strategies:</label>
-            <input type="checkbox" id="specific" name="specific" value="true">
-        </div>
-        <div class="util" style="display: grid; grid-template-columns: 15% auto auto auto;">
-            <short class="util-label" style="grid-column: 1; grid-row: 1;"></short>
-            <short id="rock1" class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
-            <short id="paper1" class="util-label" style="grid-column: 3; grid-row: 1;">Paper</short>
-            <short id="scissors1" class="util-label" style="grid-column: 4; grid-row: 1;">Scissors</short>
-            <short id="rock2" class="util-label" style="grid-column: 1; grid-row: 2;">Rock</short>
-            <short id="paper2" class="util-label" style="grid-column: 1; grid-row: 3;">Paper</short>
-            <short id="scissors2" class="util-label" style="grid-column: 1; grid-row: 4;">Scissors</short>
+                <input type="checkbox" id="habitMove" name="habitMove" value="true">
+                <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
+                <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
+                <label for="specific">Opponent uses only one of the checked Strategies:</label>
+                <input type="checkbox" id="specific" name="specific" value="true">
+            </div>
+            <short class="caption">RPS Utilities</short>
+            <hr>
+            <div class="util" style="display: grid; grid-template-columns: 15% auto auto auto;">
+                <short class="util-label" style="grid-column: 1; grid-row: 1;">P1 / P2</short>
+                <short id="rock1" class="util-label" style="grid-column: 2; grid-row: 1;">Rock</short>
+                <short id="paper1" class="util-label" style="grid-column: 3; grid-row: 1;">Paper</short>
+                <short id="scissors1" class="util-label" style="grid-column: 4; grid-row: 1;">Scissors</short>
+                <short id="rock2" class="util-label" style="grid-column: 1; grid-row: 2;">Rock</short>
+                <short id="paper2" class="util-label" style="grid-column: 1; grid-row: 3;">Paper</short>
+                <short id="scissors2" class="util-label" style="grid-column: 1; grid-row: 4;">Scissors</short>
 
-            <div class="utils" style="grid-column: 2; grid-row: 2;">
-                <input id="rr_util1" name="rr_util" value="0" disabled>
-                <input id="rr_util2" name="rr_util" value="0" disabled>
+                <div class="utils" style="grid-column: 2; grid-row: 2;">
+                    <input id="rr_util1" name="rr_util" value="0" disabled>
+                    <input id="rr_util2" name="rr_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 3;">
+                    <input id="pp_util1" name="pp_util" value="0" disabled>
+                    <input id="pp_util2" name="pp_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 4;">
+                    <input id="ss_util1" name="ss_util" value="0" disabled>
+                    <input id="ss_util2" name="ss_util" value="0" disabled>
+                </div>
+                <div class="utils" style="grid-column: 2; grid-row: 3;">
+                    <input type="number" id="pr_util1" name="pr_util1" value="1">
+                    <input type="number" id="pr_util2" name="pr_util2" value="-1">
+                </div>
+                <div class="utils" style="grid-column: 2; grid-row: 4;">
+                    <input type="number" id="sr_util1" name="sr_util1" value="-1">
+                    <input type="number" id="sr_util2" name="sr_util2" value="1">
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 4;">
+                    <input type="number" id="sp_util1" name="sp_util1" value="1">
+                    <input type="number" id="sp_util2" name="sp_util2" value="-1">
+                </div>
+                <div class="utils" style="grid-column: 3; grid-row: 2;">
+                    <input type="number" id="rp_util1" name="rp_util1" value="-1">
+                    <input type="number" id="rp_util2" name="rp_util2" value="1">
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 2;">
+                    <input type="number" id="rs_util1" name="rs_util1" value="1">
+                    <input type="number" id="rs_util2" name="rs_util2" value="-1">
+                </div>
+                <div class="utils" style="grid-column: 4; grid-row: 3;">
+                    <input type="number" id="ps_util1" name="ps_util1" value="-1">
+                    <input type="number" id="ps_util2" name="ps_util2" value="1">
+                </div>
             </div>
-            <div class="utils" style="grid-column: 3; grid-row: 3;">
-                <input id="pp_util1" name="pp_util" value="0" disabled>
-                <input id="pp_util2" name="pp_util" value="0" disabled>
-            </div>
-            <div class="utils" style="grid-column: 4; grid-row: 4;">
-                <input id="ss_util1" name="ss_util" value="0" disabled>
-                <input id="ss_util2" name="ss_util" value="0" disabled>
-            </div>
-            <div class="utils" style="grid-column: 2; grid-row: 3;">
-                <input type="number" id="pr_util1" name="pr_util1" value="1">
-                <input type="number" id="pr_util2" name="pr_util2" value="-1">
-            </div>
-            <div class="utils" style="grid-column: 2; grid-row: 4;">
-                <input type="number" id="sr_util1" name="sr_util1" value="-1">
-                <input type="number" id="sr_util2" name="sr_util2" value="1">
-            </div>
-            <div class="utils" style="grid-column: 3; grid-row: 4;">
-                <input type="number" id="sp_util1" name="sp_util1" value="1">
-                <input type="number" id="sp_util2" name="sp_util2" value="-1">
-            </div>
-            <div class="utils" style="grid-column: 3; grid-row: 2;">
-                <input type="number" id="rp_util1" name="rp_util1" value="-1">
-                <input type="number" id="rp_util2" name="rp_util2" value="1">
-            </div>
-            <div class="utils" style="grid-column: 4; grid-row: 2;">
-                <input type="number" id="rs_util1" name="rs_util1" value="1">
-                <input type="number" id="rs_util2" name="rs_util2" value="-1">
-            </div>
-            <div class="utils" style="grid-column: 4; grid-row: 3;">
-                <input type="number" id="ps_util1" name="ps_util1" value="-1">
-                <input type="number" id="ps_util2" name="ps_util2" value="1">
-            </div>
-        </div>
-        <input class="submit-button" type="submit" value="Submit">
-    </form>
-</div>
+            <input class="submit-button" type="submit" value="Submit">
+        </form>
+    </div>
 </header>
 
 <body>
     <div id="main">
         <div class="winnerTextContainer">
-            <p id="p1_score">Player 1 Score: <short id="p1_score_value">0</short>
+            <p id="p1_score">Player 1 Score (You): <short id="p1_score_value">0</short>
                 <short id="p1_score_addition"></short>
             </p>
             <p id="winnerText"></p>
-            <p id="p2_score">Player 2 Score: <short id="p2_score_value">0</short>
+            <p id="p2_score">Player 2 Score (CPU): <short id="p2_score_value">0</short>
                 <short id="p2_score_addition"></short>
             </p>
         </div>
