@@ -318,6 +318,8 @@ hr {
 #RPS_Game>#CPU_strategies {
     grid-column: 3;
     padding: 2%;
+    overflow-y: auto;
+    max-height: 28rem;
 }
 
 @media (max-width: 820px) {
@@ -332,5 +334,10 @@ hr {
     #RPS_Game {
         display: flex;
         flex-direction: column;
+    }
+
+    #RPS_Game > #CPU_strategies {
+        overflow-y: unset;
+        max-height: fit-content;
     }
 }
