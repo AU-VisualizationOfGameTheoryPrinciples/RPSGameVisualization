@@ -407,7 +407,7 @@ function showActiveStrategies() {
         elem.append(tie);
     }
     if (doHabitCounterMove) {
-        addActiveStrategyElement("Habit Move", "Use the counter option to the option resulting of the habit strategy.", list);
+        addActiveStrategyElement("Habit Counter Move", "Use the counter option to the option resulting of the habit strategy.", list);
     }
     strategies_tab.append(list);
 }
