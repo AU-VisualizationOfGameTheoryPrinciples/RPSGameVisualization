@@ -101,19 +101,23 @@
                 <short id="p2_score_addition"></short>
             </p>
         </div>
-        <div class="buttons_RPS">
-            <short class="player_tag">CPU Player</short>
-            <div class="buttons_RPS_p2">
-                <button class="otherOpponentMove1" disabled></button>
-                <button id="opponentMove" disabled>?</button>
-                <button class="otherOpponentMove2" disabled></button>
+        <div id="RPS_Game">
+            <div class="buttons_RPS">
+                <short class="player_tag">CPU Player</short>
+                <div class="buttons_RPS_p2">
+                    <button class="otherOpponentMove1" disabled></button>
+                    <button id="opponentMove" disabled>?</button>
+                    <button class="otherOpponentMove2" disabled></button>
+                </div>
+                <div class="buttons_RPS_p1">
+                    <button id="rock" class="rock">Rock</button>
+                    <button id="paper" class="paper">Paper</button>
+                    <button id="scissors" class="scissors">Scissors</button>
+                </div>
+                <short class="player_tag">You</short>
             </div>
-            <div class="buttons_RPS_p1">
-                <button id="rock" class="rock">Rock</button>
-                <button id="paper" class="paper">Paper</button>
-                <button id="scissors" class="scissors">Scissors</button>
-            </div>
-            <short class="player_tag">You</short>
+            <div id="Winner_history_container"><short class="player_tag">Player 1 vs Player 2 -<br>Winner History:</short><div id="Winner_history"></div></div>
+            <div id="CPU_strategies"><short class="player_tag">Active CPU Strategies:</short></div>
         </div>
     </div>
 </body>

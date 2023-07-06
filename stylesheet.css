@@ -3,31 +3,32 @@ header>nav {
     grid-template-columns: 30% auto 30%;
     place-items: center;
     /* justify-content: space-evenly; */
-    padding: 1em 0em;
-    margin: 1em 0em;
+    padding: 0.8rem 0rem;
+    margin: 0.5rem 0rem 0.8rem;
     border: 2px solid #000000;
     box-shadow: #000000 1px 1px 3px;
 }
 
 nav>.title {
-    margin-left: 1em;
+    margin-left: 1rem;
 }
 
 .setup_button {
-    width: 3em;
-    height: 3em;
+    width: 3rem;
+    height: 3rem;
+    z-index: 3;
 }
 
 .logo {
-    max-width: 8em;
-    min-width: 5em;
+    max-width: 8rem;
+    min-width: 5rem;
     width: 100%;
 }
 
 .title {
     text-align: center;
     font-family: 'Rampart One', 'Bangers', 'Comic Sans MS', Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.65rem;
+    font-size: 1.65em;
     position: relative;
     display: flex;
     justify-self: center;
@@ -141,7 +142,7 @@ body {
     font-weight: bold;
     border: 2px solid #000000;
     /* width: fit-content; */
-    padding: 2%;
+    padding: 0.8rem;
     /* align-content: center; */
     /* display: flex; */
     /* justify-content: space-around; */
@@ -180,7 +181,7 @@ body {
     border: 2px solid #000000;
     box-shadow: #000000 2px 4px 8px;
     z-index: 2;
-    top: calc(28vh);
+    top: calc(18vh);
 }
 
 .form {
@@ -297,4 +298,39 @@ hr {
     border-bottom: 2px solid #8a88881a;
     margin: -4px;
     padding: 0;
+}
+
+#RPS_Game {
+    display: grid;
+    grid-template-columns: 30% auto 30%;
+}
+
+#RPS_Game>#Winner_history_container {
+    grid-column: 1;
+    padding: 2%;
+}
+
+#RPS_Game>.buttons_RPS {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#RPS_Game>#CPU_strategies {
+    grid-column: 3;
+    padding: 2%;
+}
+
+@media (max-width: 820px) {
+    .title {
+        font-size: 1.2em;
+    }
+
+    .winnerTextContainer {
+        padding: 0.5rem;
+    }
+
+    #RPS_Game {
+        display: flex;
+        flex-direction: column;
+    }
 }

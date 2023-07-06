@@ -11,6 +11,8 @@ var buttonsRPS = [buttonRock, buttonPaper, buttonScissors];
 var buttonOpponent = document.querySelector("#opponentMove");
 var winnerText = document.querySelector("#winnerText");
 
+var Winner_History = new Array();
+
 const moveRockRock = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.ROCK, [getUtility("rr_util1", 0), getUtility("rr_util2", 0)]);
 const moveRockPaper = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.PAPER, [getUtility("rp_util1", -1), getUtility("rp_util2", 1)]);
 const moveRockScissors = new RPS_MOVE_TUPLE(RPS_MOVE.ROCK, RPS_MOVE.SCISSORS, [getUtility("rs_util1", 1), getUtility("rs_util2", -1)]);
@@ -53,6 +55,8 @@ setValueById("habitMoveCounter", doHabitCounterMove);
 setValueById("specific", doOnlyOneStrategy);
 
 var specific_move_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
+
+showActiveStrategies();
 
 function getMoveUtilities(move_p1, move_p2) {
     // bring p1 and p2 in correct order
@@ -121,7 +125,7 @@ function calcMSNE(current_player_num) {
     rs = moveRockScissors.utilityValue[other_player_index];
     ps = movePaperScissors.utilityValue[other_player_index];
     ss = moveScissorsScissors.utilityValue[other_player_index];
-    
+
     const x = (-rp + pp + rs - ps) / (rr - pr - rs + ps);
     const y = (ps - rs) / (rr - pr - rs + ps);
     const p = -pr + ps + sr - ss;
@@ -341,18 +345,80 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     //     case 1: message += " beats "; break;
     //     case -1: message += " loses to "; break;
     // }
+    let winner;
     if (utilityValue > 0) {
         message += " beats ";
+        winner = 1;
     }
     else if (utilityValue < 0) {
         message += " loses to ";
+        winner = 2;
     }
     else if (utilityValue == 0) {
         message += " ties with ";
+        winner = 0;
     }
     message += arrayRPSName[move_p2] + "!";
     // alert(message);
+    if(winner && winner>=0){
+        message += ` P${winner} wins!`;
+    }
     winnerText.textContent = message;
+    Winner_History.push(winner);
+    showWinningHistory(message)
 
     animateResult(winnerText);
+}
+
+function showWinningHistory(winnerText) {
+    let winHistory = document.getElementById("Winner_history");
+    let winner = document.createElement("p");
+    winner.append(winnerText)
+    winHistory.append(winner);
+
+    if(winHistory.children.length > 10){
+        winHistory.removeChild(winHistory.firstChild);
+    }
+}
+
+function showActiveStrategies() {
+    let strategies_tab = document.getElementById("CPU_strategies");
+    var list = document.createElement("ul");
+    if (doOnlyOneStrategy) {
+        // strategies_tab.textContent += "doRandomMove";
+        addActiveStrategyElement("Only one of the checked Strategies", "The whole game only one of the strategies below is used till page reload.", list);
+    }
+    if (doRandomMove) {
+        addActiveStrategyElement("Random Move", "Choose one of the 3 options one third of the time.", list);
+    }
+    if (doRandomMSNEMove){
+        addActiveStrategyElement("Random MSNE Move", "Choose one of the options based on Mixed Strategy Nash Equilibria probabilities depending on utility changes.", list);
+    }
+    if (doHabitMove) {
+        let elem = addActiveStrategyElement("Habit Move", "Use one of the options in a certain habit:", list);
+        let won = document.createElement("p");
+        let lost = document.createElement("p");
+        let tie = document.createElement("p");
+        won.append("- Won: Use same option again.");
+        lost.append("- Lost: Use the counter option to the opponent's last move.")
+        tie.append("- Tie: Use random move.");
+        elem.append(won);
+        elem.append(lost);
+        elem.append(tie);
+    }
+    if (doHabitCounterMove) {
+        addActiveStrategyElement("Habit Move", "Use the counter option to the option resulting of the habit strategy.", list);
+    }
+    strategies_tab.append(list);
+}
+
+function addActiveStrategyElement(title, textContent, list) {
+    var strategy_title = document.createElement("h4");
+    var listItem = document.createElement("li");
+    // elem.setAttribute("class", className);
+    strategy_title.append(title + ":");
+    listItem.append(strategy_title);
+    listItem.append(textContent);
+    list.append(listItem);
+    return listItem;
 }
