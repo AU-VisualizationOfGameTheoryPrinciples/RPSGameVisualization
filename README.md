@@ -2,6 +2,10 @@
 
 This is a Visualization of the Rock, Paper, Scissors Game showing its connections to Game Theory.
 
+## Learning Objectives of the Rock, Paper, Scissors Game
+- explain the concept of [zero-sum games](https://en.wikipedia.org/wiki/Zero-sum_game)
+- explain the concept of [mixed-strategy equilibria](https://en.wikipedia.org/wiki/Strategy_(game_theory)#Mixed_strategy)
+- use mixed strategies
 ## Introduction
 - You can play Rock, Paper, Scissors against a Computer player (CPU).
 - By default the CPU chooses their move randomally in a equal manner, so one of the three options is choosed one third of the time.
