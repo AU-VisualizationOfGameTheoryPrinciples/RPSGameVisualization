@@ -2,6 +2,7 @@ import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE, RPS_MOVE_TUPLE_SETUP } from "./
 import { animateAddition, animateResult } from "./animations.js";
 import { getFlag, setValueById, getUtility } from "./manageFormValues.js";
 import { countCheckedOptions, getCheckedOptionsNumber, getComputerPlayer2Move, setupStrategies } from "./RPS_Strategies.js";
+import { playBeatSound, playLoseSound, playTieSound } from "./js/model/Audio_Setup.js";
 // import { calcMSNE } from "./calcMSNE.js";
 
 /**
@@ -140,14 +141,17 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     // }
     let winner;
     if (utilityValue > 0) {
+        playBeatSound();
         message += " beats ";
         winner = 1;
     }
     else if (utilityValue < 0) {
+        playLoseSound();
         message += " loses to ";
         winner = 2;
     }
     else if (utilityValue == 0) {
+        playTieSound();
         message += " ties with ";
         winner = 0;
     }
