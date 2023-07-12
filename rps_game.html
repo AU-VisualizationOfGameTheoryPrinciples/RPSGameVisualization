@@ -26,15 +26,15 @@
             <short class="caption">CPU Strategies</short>
             <hr>
             <div class="strategies">
-                <label for="random">Opponent uses random move:</label>
+                <label title="Uses each move one third of the time." for="random">Opponent uses random move:</label>
                 <input type="checkbox" id="random" name="random" value="true" checked>
-                <label for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
+                <label title="Based on Mixed Strategy Probabilities depending on changed utilities." for="randomMSNE">Opponent uses his Mixed Strategy Nash Equilibria:</label>
                 <input type="checkbox" id="randomMSNE" name="randomMSNE" value="true">
-                <label for="habitMove">Opponent uses his moves in a certain habit:</label>
+                <label title="Keeps his choice by winning, switches after a loss to the counter move." for="habitMove">Opponent uses his moves in a certain habit:</label>
                 <input type="checkbox" id="habitMove" name="habitMove" value="true">
-                <label for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
+                <label title="Uses the counter move to the habit of keeping winning move/changing losing move." for="habitMoveCounter">Opponent tries to counter common habit moves:</label>
                 <input type="checkbox" id="habitMoveCounter" name="habitMoveCounter" value="true">
-                <label for="specific">Opponent uses only one of the checked Strategies:</label>
+                <label title="Uses only one randomally selected out of the checked strategies till page reload." for="specific">Opponent uses only one of the checked Strategies:</label>
                 <input type="checkbox" id="specific" name="specific" value="true">
             </div>
             <short class="caption">RPS Utilities</short>
