@@ -7,19 +7,19 @@
  * By restructuring the equations with some substitutions 
  * let them be calculated in base Javascript:
  * 
- *  EUL = EUC = EUR
- *  EUL = dU a2 + dM d2 + (1-dU-dM) g2
- *  EUC = dU b2 + dM e2 + (1-dU-dM) h2
- *  EUR = dU c2 + dM f2 + (1-dU-dM) i2
+ *  EUU = EUM = EUD
+ *  EUU = dL a2 + dC d2 + (1-dL-dC) g2
+ *  EUM = dL b2 + dC e2 + (1-dL-dC) h2
+ *  EUD = dL c2 + dC f2 + (1-dL-dC) i2
  * 
  *  x = (-d2+e2+g2-h2) / (a2-b2-g2+h2)
  *  y = (h2-g2) / (a2-b2-g2+h2)
  *  p = -b2 + h2 + c2 - i2
  *  q = -h2 + i2
  * 
- *  dM = ((y) p + q) / ((-x) p + q + e2 - f2)
- *  dU = dM (x) + (y)
- *  dD = 1 - dM - dU
+ *  dC = ((y) p + q) / ((-x) p + q + e2 - f2)
+ *  dL = dC (x) + (y)
+ *  dR = 1 - dC - dL
  * 
 **/
 function calcMSNE(rr, pr, sr, rp, pp, sp, rs, ps, ss) {
@@ -31,24 +31,24 @@ function calcMSNE(rr, pr, sr, rp, pp, sp, rs, ps, ss) {
     const q = -ps + ss;
 
     // those variables, are the sigma variables showing the probabilities of one player getting equal Expected Utilities
-    var dM = (y * p + q) / (-x * p + q + pp - sp);
-    var dU = dM * x + y;
-    var dD = 1 - dM - dU;
+    var dC = (y * p + q) / (-x * p + q + pp - sp);
+    var dL = dC * x + y;
+    var dR = 1 - dC - dL;
 
-    console.log(`MSNE calced: Rock = ${dU}, Paper = ${dM}, Scissors = ${dD}`)
+    console.log(`MSNE calced: Rock = ${dL}, Paper = ${dC}, Scissors = ${dR}`)
 
     // original equations
-    // const EUL = dU * moveRockRock.utilityValue[current_player_index] + dM * moveRockPaper.utilityValue[current_player_index] + dD * moveRockScissors.utilityValue[current_player_index];
-    // const EUM = dU * movePaperRock.utilityValue[current_player_index] + dM * movePaperPaper.utilityValue[current_player_index] + dD * movePaperScissors.utilityValue[current_player_index];
-    // const EUR = dU * moveScissorsRock.utilityValue[current_player_index] + dM * moveScissorsPaper.utilityValue[current_player_index] + dD * moveScissorsScissors.utilityValue[current_player_index];
+    // const EUL = dL * moveRockRock.utilityValue[current_player_index] + dC * moveRockPaper.utilityValue[current_player_index] + dR * moveRockScissors.utilityValue[current_player_index];
+    // const EUM = dL * movePaperRock.utilityValue[current_player_index] + dC * movePaperPaper.utilityValue[current_player_index] + dR * movePaperScissors.utilityValue[current_player_index];
+    // const EUR = dL * moveScissorsRock.utilityValue[current_player_index] + dC * moveScissorsPaper.utilityValue[current_player_index] + dR * moveScissorsScissors.utilityValue[current_player_index];
 
-    return [dU, dM, dD];
+    return [dL, dC, dR];
 }
 
 export { calcMSNE };
 
 // calc Mixed Strategy Nash Equilibria for one player based on other player's utility
-// test setup
+// test setleft
 
 // var rr = 0;
 // var pr = -2;
@@ -65,16 +65,16 @@ export { calcMSNE };
 // const p = -pr + ps + sr - ss;
 // const q = -ps + ss;
 
-// var dM = (y * p + q) / (-x * p + q + pp - sp);
-// var dU = dM * x + y;
-// var dD = 1 - dM - dU;
+// var dC = (y * p + q) / (-x * p + q + pp - sp);
+// var dL = dC * x + y;
+// var dR = 1 - dC - dL;
 
 // var others = document.getElementById("others");
-// var mid = document.getElementById("dM");
-// var up = document.getElementById("dU");
-// var down = document.getElementById("dD");
+// var center = document.getElementById("dC");
+// var left = document.getElementById("dL");
+// var right = document.getElementById("dR");
 
 // others.innerText = "x: " + x + " y: " + y + " p: " + p + " q: " + q
-// mid.innerText = dM;
-// up.innerText = dU;
-// down.innerText = dD;
+// center.innerText = dC;
+// left.innerText = dL;
+// right.innerText = dR;
