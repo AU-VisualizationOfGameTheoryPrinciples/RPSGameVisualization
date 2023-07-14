@@ -1,8 +1,8 @@
-import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE, RPS_MOVE_TUPLE_SETUP } from "./RPS_Moves.js";
-import { animateAddition, animateResult } from "./animations.js";
-import { getFlag, setValueById, getUtility } from "./manageFormValues.js";
-import { countCheckedOptions, getCheckedOptionsNumber, getComputerPlayer2Move, setupStrategies } from "./RPS_Strategies.js";
-import { playBeatSound, playLoseSound, playTieSound } from "./js/model/Audio_Setup.js";
+import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE, RPS_MOVE_TUPLE_SETUP } from "../model/RPS_Moves.js";
+import { animateAddition, animateResult } from "../view/animations.js";
+import { getFlag, setValueById, getUtility } from "../view/manageFormValues.js";
+import { countCheckedOptions, getCheckedOptionsNumber, getComputerPlayer2Move, setupStrategies } from "../model/RPS_Strategies.js";
+import { playBeatSound, playLoseSound, playTieSound } from "../model/Audio_Setup.js";
 
 /**
  * GAME SETUP

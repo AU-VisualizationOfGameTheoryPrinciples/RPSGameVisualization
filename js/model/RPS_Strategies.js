@@ -1,5 +1,5 @@
 import { arrayRPSName, RPS_MOVE } from "./RPS_Moves.js";
-import { calcMSNE } from "./calcMSNE.js";
+import { calcMSNE } from "../util/calcMSNE.js";
 
 var doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove;
 var option_count = 0;
