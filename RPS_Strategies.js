@@ -1,4 +1,5 @@
 import { arrayRPSName, RPS_MOVE } from "./RPS_Moves.js";
+import { calcMSNE } from "./calcMSNE.js";
 
 var doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove;
 var option_count = 0;
@@ -134,21 +135,6 @@ function getRPSHabitCounterMove(last_move_current_player, last_move_other_player
 
 function getMSNE(current_player_num) {
     let other_player_num = current_player_num % 2 + 1;
-    let ret = calcMSNE(current_player_num);
-
-    let rock = document.querySelector(`#rock${current_player_num}`);
-    let paper = document.querySelector(`#paper${current_player_num}`);
-    let scissors = document.querySelector(`#scissors${current_player_num}`);
-
-    rock.innerText = arrayRPSName[RPS_MOVE.ROCK] + '\n (' + roundNumByThreeDecimals(ret[0]).toFixed(2) * 100 + "%)";
-    paper.innerText = arrayRPSName[RPS_MOVE.PAPER] + "\n (" + roundNumByThreeDecimals(ret[1]).toFixed(2) * 100 + "%)";
-    scissors.innerText = arrayRPSName[RPS_MOVE.SCISSORS] + "\n (" + roundNumByThreeDecimals(ret[2]).toFixed(2) * 100 + "%)";
-
-    return ret;
-}
-
-function calcMSNE(current_player_num) {
-    let other_player_num = current_player_num % 2 + 1;
     let current_player_index = current_player_num - 1;
     let other_player_index = other_player_num - 1;
 
@@ -163,25 +149,17 @@ function calcMSNE(current_player_num) {
     ps = MOVE_SETUP.movePaperScissors.utilityValue[other_player_index];
     ss = MOVE_SETUP.moveScissorsScissors.utilityValue[other_player_index];
 
-    // calculation based on the expected utility equation system
-    //  - but rearranged and substituted to let Javascript do the calculating part
-    const x = (-rp + pp + rs - ps) / (rr - pr - rs + ps);
-    const y = (ps - rs) / (rr - pr - rs + ps);
-    const p = -pr + ps + sr - ss;
-    const q = -ps + ss;
+    let ret = calcMSNE(rr, pr, sr, rp, pp, sp, rs, ps, ss);
 
-    // those variables, are the sigma variables showing the probabilities of one player getting equal Expected Utilities
-    var dM = (y * p + q) / (-x * p + q + pp - sp);
-    var dU = dM * x + y;
-    var dD = 1 - dM - dU;
+    let rock = document.querySelector(`#rock${current_player_num}`);
+    let paper = document.querySelector(`#paper${current_player_num}`);
+    let scissors = document.querySelector(`#scissors${current_player_num}`);
 
-    console.log(`MSNE calced: Rock = ${dU}, Paper = ${dM}, Scissors = ${dD}`)
+    rock.innerText = arrayRPSName[RPS_MOVE.ROCK] + '\n (' + roundNumByThreeDecimals(ret[0]).toFixed(2) * 100 + "%)";
+    paper.innerText = arrayRPSName[RPS_MOVE.PAPER] + "\n (" + roundNumByThreeDecimals(ret[1]).toFixed(2) * 100 + "%)";
+    scissors.innerText = arrayRPSName[RPS_MOVE.SCISSORS] + "\n (" + roundNumByThreeDecimals(ret[2]).toFixed(2) * 100 + "%)";
 
-    // const EUL = dU * moveRockRock.utilityValue[current_player_index] + dM * moveRockPaper.utilityValue[current_player_index] + dD * moveRockScissors.utilityValue[current_player_index];
-    // const EUM = dU * movePaperRock.utilityValue[current_player_index] + dM * movePaperPaper.utilityValue[current_player_index] + dD * movePaperScissors.utilityValue[current_player_index];
-    // const EUR = dU * moveScissorsRock.utilityValue[current_player_index] + dM * moveScissorsPaper.utilityValue[current_player_index] + dD * moveScissorsScissors.utilityValue[current_player_index];
-
-    return [dM, dU, dD];
+    return ret;
 }
 
 function roundNumByThreeDecimals(num) {

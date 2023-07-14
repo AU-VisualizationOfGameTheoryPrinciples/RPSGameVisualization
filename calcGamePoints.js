@@ -3,7 +3,6 @@ import { animateAddition, animateResult } from "./animations.js";
 import { getFlag, setValueById, getUtility } from "./manageFormValues.js";
 import { countCheckedOptions, getCheckedOptionsNumber, getComputerPlayer2Move, setupStrategies } from "./RPS_Strategies.js";
 import { playBeatSound, playLoseSound, playTieSound } from "./js/model/Audio_Setup.js";
-// import { calcMSNE } from "./calcMSNE.js";
 
 /**
  * GAME SETUP
