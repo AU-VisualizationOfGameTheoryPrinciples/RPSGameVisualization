@@ -52,7 +52,7 @@ function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_move_num = 
     }
     if (doRandomMSNEMove) {
         if (getsRandomlyPicked(option_count, rand)) {
-            let MSNE = MSNE_p1;
+            let MSNE = MSNE_p2;
 
             let percMSNERock = MSNE[0];
             let percMSNEPaper = MSNE[1];
