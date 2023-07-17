@@ -43,3 +43,12 @@ $$dL = dC (x) + (y)$$
 $$dR = 1 - dC - dL$$
 
 - see the [Game Theory 101](https://www.youtube.com/watch?v=C6_72XPpKNQ&list=PLKI1h_nAkaQoDzI4xDIXzx6U2ergFmedo&index=39) video series for more information, which was used as a basis
+
+## Credits
+
+Sounds of Freesound.org were used on this application.
+
+- "Stone.wav" by danielpodlovics of Freesound.org
+- "Book, Flipping Through Pages, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+- "Scissors.wav" by Godowan of Freesound.org
+- "metallic_cling1.mp3" by ZorroBms1001 of Freesound.org

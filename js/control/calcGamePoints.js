@@ -140,12 +140,14 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     // }
     let winner;
     if (utilityValue > 0) {
-        playBeatSound();
+        playBeatSound(move_p1);
+        // playBeatSound();
         message += " beats ";
         winner = 1;
     }
     else if (utilityValue < 0) {
-        playLoseSound();
+        playBeatSound(move_p2);
+        // playLoseSound();
         message += " loses to ";
         winner = 2;
     }
