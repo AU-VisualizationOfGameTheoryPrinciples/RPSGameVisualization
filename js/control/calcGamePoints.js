@@ -166,6 +166,10 @@ function printWinningMessage(move_p1, move_p2, utilityValue) {
     animateResult(winnerText);
 }
 
+/**
+ * show past ten RPS move interactions on a list
+ * @param {String} winnerText 
+ */
 function showWinningHistory(winnerText) {
     let winHistory = document.getElementById("Winner_history");
     let winner = document.createElement("p");
@@ -177,6 +181,9 @@ function showWinningHistory(winnerText) {
     }
 }
 
+/**
+ * show active strategies of the cpu on an active strategy list
+ */
 function showActiveStrategies() {
     let strategies_tab = document.getElementById("CPU_strategies");
     var list = document.createElement("ul");
@@ -208,6 +215,13 @@ function showActiveStrategies() {
     strategies_tab.append(list);
 }
 
+/**
+ * adds given strategy to the active strategy list
+ * @param {String} title name of the strategy
+ * @param {String} textContent description
+ * @param {HTMLUListElement} list list element to be added to
+ * @returns {HTMLElement} list item
+ */
 function addActiveStrategyElement(title, textContent, list) {
     var strategy_title = document.createElement("h4");
     var listItem = document.createElement("li");

@@ -9,6 +9,12 @@ class RPS_MOVE_TUPLE {
     move_p2;
     utilityValue;
 
+    /**
+     * "move against move"-object containing utilites for both players
+     * @param {RPS_MOVE} move_p1 
+     * @param {RPS_MOVE} move_p2 
+     * @param {Array<number>[2]} utilityValue "move against move" utility values for both players [p1,p2]
+     */
     constructor(move_p1, move_p2, utilityValue) {
         this.move_p1 = move_p1;
         this.move_p2 = move_p2;
@@ -27,6 +33,18 @@ class RPS_MOVE_TUPLE_SETUP {
     moveScissorsRock;
     moveScissorsPaper;
 
+    /**
+     * @params "move against move"-objects containing utilites for both players
+     * @param {RPS_MOVE_TUPLE} moveRockRock 
+     * @param {RPS_MOVE_TUPLE} moveRockPaper 
+     * @param {RPS_MOVE_TUPLE} moveRockScissors 
+     * @param {RPS_MOVE_TUPLE} movePaperPaper 
+     * @param {RPS_MOVE_TUPLE} movePaperScissors 
+     * @param {RPS_MOVE_TUPLE} movePaperRock 
+     * @param {RPS_MOVE_TUPLE} moveScissorsScissors 
+     * @param {RPS_MOVE_TUPLE} moveScissorsRock 
+     * @param {RPS_MOVE_TUPLE} moveScissorsPaper 
+     */
     constructor(moveRockRock, moveRockPaper, moveRockScissors, movePaperPaper, movePaperScissors, movePaperRock, moveScissorsScissors, moveScissorsRock, moveScissorsPaper) {
         this.moveRockRock = moveRockRock;
         this.moveRockPaper = moveRockPaper;
@@ -39,6 +57,12 @@ class RPS_MOVE_TUPLE_SETUP {
         this.moveScissorsPaper = moveScissorsPaper;
     }
 
+    /**
+     * 
+     * @param {RPS_MOVE} move_p1 
+     * @param {RPS_MOVE} move_p2 
+     * @returns {Array<number>[2]} "move against move"-utility values for both players
+     */
     getMoveUtilities(move_p1, move_p2) {
         // bring p1 and p2 in correct order
         return this.getMoveUtilityHelper(move_p1, move_p2);
