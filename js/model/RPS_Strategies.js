@@ -1,7 +1,8 @@
 import { arrayRPSName, RPS_MOVE, RPS_MOVE_TUPLE_SETUP } from "./RPS_Moves.js";
 import { calcMSNE } from "../util/calcMSNE.js";
 
-var doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove;
+var doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove, doOnlyOneStrategy;
+var specific_strat_num;
 var option_count = 0;
 var MSNE_p1;
 var MSNE_p2;
@@ -14,19 +15,24 @@ var MOVE_SETUP;
  * @param {boolean} boolRandomMSNEMove 
  * @param {boolean} boolHabitMove 
  * @param {boolean} boolHabitCounterMove 
+ * @param {boolean} boolOnlyOneStrategy
  */
-function setupStrategies(moveSetup, boolRandomMove, boolRandomMSNEMove, boolHabitMove, boolHabitCounterMove) {
+function setupStrategies(moveSetup, boolRandomMove, boolRandomMSNEMove, boolHabitMove, boolHabitCounterMove, boolOnlyOneStrategy) {
     MOVE_SETUP = moveSetup;
-    
+
     doRandomMove = boolRandomMove;
     doRandomMSNEMove = boolRandomMSNEMove;
     doHabitMove = boolHabitMove;
     doHabitCounterMove = boolHabitCounterMove;
+    doOnlyOneStrategy = boolOnlyOneStrategy;
 
     if (doRandomMSNEMove) {
         MSNE_p1 = getMSNE(1);
         MSNE_p2 = getMSNE(2);
     }
+
+    // fixed strategy number
+    specific_strat_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
 }
 
 /**
@@ -66,11 +72,16 @@ function getCheckedOptionsNumber() {
 /**
  * @param {RPS_MOVE} last_move_p1 p1's last-turn move
  * @param {RPS_MOVE} last_move_p2 p2's last-turn move
- * @param {number} [specific_move_num] fixed move for computer player e. g. randomized number for the whole round
+ * @param {number} [specific_strat_num_input] fixed move for computer player e. g. randomized number for the whole round
  */
-function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_move_num = null) {
+function getComputerPlayer2Move(last_move_p1, last_move_p2, specific_strat_num_input = null) {
     option_count = 1;
-    let rand = specific_move_num == null ? getCheckedOptionsNumber() : specific_move_num;
+    let rand;
+    if(specific_strat_num_input){
+        rand = specific_strat_num_input
+    } else {
+        rand = specific_strat_num == null ? getCheckedOptionsNumber() : specific_strat_num;
+    }
     if (doRandomMove) {
         if (getsRandomlyPicked(option_count, rand)) {
             return getRandomMove();

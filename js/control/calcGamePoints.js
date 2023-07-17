@@ -1,7 +1,7 @@
 import { RPS_MOVE, arrayRPSName, RPS_MOVE_TUPLE, RPS_MOVE_TUPLE_SETUP } from "../model/RPS_Moves.js";
 import { animateAddition, animateResult } from "../view/animations.js";
 import { getFlag, setValueById, getUtility } from "../view/manageFormValues.js";
-import { countCheckedOptions, getCheckedOptionsNumber, getComputerPlayer2Move, setupStrategies } from "../model/RPS_Strategies.js";
+import { getComputerPlayer2Move, setupStrategies } from "../model/RPS_Strategies.js";
 import { playBeatSound, playLoseSound, playTieSound } from "../model/Audio_Setup.js";
 
 /**
@@ -42,10 +42,22 @@ setValueById("habitMove", doHabitMove);
 setValueById("habitMoveCounter", doHabitCounterMove);
 setValueById("specific", doOnlyOneStrategy);
 
-var specific_move_num = doOnlyOneStrategy ? getCheckedOptionsNumber() : null;
+setupStrategies(MOVE_SETUP, doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove, doOnlyOneStrategy);
 
-setupStrategies(MOVE_SETUP, doRandomMove, doRandomMSNEMove, doHabitMove, doHabitCounterMove);
 showActiveStrategies();
+
+/**
+ * count all checked strategy options
+ * @returns {number} amount of checked options
+ */
+function countCheckedOptions() {
+    let counter = 0;
+    if (doRandomMove) counter++;
+    if (doRandomMSNEMove) counter++;
+    if (doHabitMove) counter++;
+    if (doHabitCounterMove) counter++;
+    return counter;
+}
 
 /**
  * SETUP- and FRONTEND-FUNCTIONS
@@ -81,7 +93,7 @@ function startGameRound(move_p1) {
     console.log("old2:" + current_move_opponent);
 
     move_p1_input = move_p1;
-    var move_opponent = getComputerPlayer2Move(move_p1_last_round, move_p2_last_round, specific_move_num);
+    var move_opponent = getComputerPlayer2Move(move_p1_last_round, move_p2_last_round);
     current_move_opponent = move_opponent;
     console.log("now1: " + move_p1_input);
     console.log("now2: " + current_move_opponent);
