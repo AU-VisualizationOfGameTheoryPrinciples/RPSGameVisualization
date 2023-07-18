@@ -1,6 +1,6 @@
 # RPSGameVisualization
 
-This is a Visualization of the Rock, Paper, Scissors Game showing its connections to Game Theory.
+This is a Visualization of the Rock, Paper, Scissors Game showing its connections to Game Theory. It was made by M-Gentes in cooperation with Professor Dr. Oscar Lin.
 
 ## Learning Objectives of the Rock, Paper, Scissors Game
 - explain the concept of [zero-sum games](https://en.wikipedia.org/wiki/Zero-sum_game)
