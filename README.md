@@ -44,6 +44,13 @@ $$dR = 1 - dC - dL$$
 
 - see the [Game Theory 101](https://www.youtube.com/watch?v=C6_72XPpKNQ&list=PLKI1h_nAkaQoDzI4xDIXzx6U2ergFmedo&index=39) video series for more information, which was used as a basis
 
+## Images
+
+- RPS process diagramm
+    - ![RPS process diagramm](./img/RPS_process_diagramm.png)
+
+- RPS code diagramm
+    - ![RPS code diagramm](./img/RPS_code_diagramm.png)
 ## Credits
 
 Sounds of Freesound.org were used on this application.
