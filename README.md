@@ -26,12 +26,14 @@ This is a Visualization of the Rock, Paper, Scissors Game showing its connection
 
 The Expected Utilities (using the move Left (Rock), Center (Paper) or Right (Scissors) - as seen in the utility table) for player 2 (CPU) can be put together to an linear equation system and with that you can calculate the probabilities for the **Mixed Strategy Nash equilibria**. By restructuring the equations with some substitutions let them be calculated in base Javascript:
 
-$$EUU = EUM = EUD$$
+```math
+EUU = EUM = EUD
+```
 
 ```math
-$$EUU = dL a2 + dC d2 + (1-dL-dC) g2$$
-$$EUM = dL b2 + dC e2 + (1-dL-dC) h2$$
-$$EUD = dL c2 + dC f2 + (1-dL-dC) i2$$#
+EUU = dL a2 + dC d2 + (1-dL-dC) g2
+EUM = dL b2 + dC e2 + (1-dL-dC) h2
+EUD = dL c2 + dC f2 + (1-dL-dC) i2
 ```
 
 $\implies$
