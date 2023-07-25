@@ -58,7 +58,7 @@ q = -h2 + i2
 - Restructure to get sigma probability variables
 
 ```math
-dC = ((y) p + q) / ((-x) p + q + e2 - f2)
+dC = {((y) p + q) \over ((-x) p + q + e2 - f2)}
 ```
 ```math
 dL = dC (x) + (y)
